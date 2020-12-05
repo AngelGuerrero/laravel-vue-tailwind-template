@@ -1925,8 +1925,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "ExampleComponent",
   mounted: function mounted() {
-    console.log("Component mounted.");
+    console.log("Este componente ha sido montado");
   }
 });
 
@@ -37531,22 +37532,11 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "container bg-white border border-black border-solid" },
-      [
-        _c("div", { staticClass: "justify-content-center" }, [
-          _c("div", {}, [
-            _c("div", {}, [
-              _c("div", {}, [_vm._v("Este es un test")]),
-              _vm._v(" "),
-              _c("div", {}, [
-                _vm._v(
-                  "\n                    I'm an example component.\n                "
-                )
-              ])
-            ])
-          ])
-        ])
-      ]
+      {
+        staticClass:
+          "\n        container\n        p-5\n        rounded\n        bg-white\n        border\n        border-gray-100\n        border-solid\n        shadow-sm"
+      },
+      [_c("h1", { staticClass: "text-3xl" }, [_vm._v("Example component!")])]
     )
   }
 ]
@@ -49778,8 +49768,8 @@ var files = __webpack_require__("./resources/js sync recursive \\.vue$/");
 
 files.keys().map(function (key) {
   return Vue.component(key.split('/').pop().split('.')[0], files(key)["default"]);
-});
-Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
+}); // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -49924,8 +49914,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\danpro\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\danpro\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\DELL 3020\GitHub\danpro\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\DELL 3020\GitHub\danpro\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

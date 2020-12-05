@@ -14,13 +14,12 @@ const mix = require("laravel-mix");
 const tailwindcss = require("tailwindcss");
 
 mix.js("resources/js/app.js", "public/js")
-    .sass("resources/sass/app.scss", "public/css")
     .options({
         hmrOptions: {
             host: "localhost", // site's host name
             port: 8080
         },
-        processCssUrls: false,
+        processCssUrls: true,
         postCss: [tailwindcss("tailwind.config.js")]
     });
 
@@ -29,7 +28,7 @@ mix.webpackConfig({
     // add any webpack dev server config here
     devServer: {
         proxy: {
-            host: "192.168.100.9", // host machine ip
+            host: "localhost", // host machine ip
             port: 8080
         },
         watchOptions: {
