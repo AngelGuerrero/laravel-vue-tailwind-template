@@ -1,4 +1,5 @@
 const mix = require('laravel-mix')
+require('laravel-mix-purgecss')
 
 /*
  |--------------------------------------------------------------------------
@@ -11,33 +12,75 @@ const mix = require('laravel-mix')
  |
  */
 
-const tailwindcss = require('tailwindcss')
-
-mix
-  .js('resources/js/app.js', 'public/js')
-  .options({
-    processCssUrls: false,
-    postCss: [require('tailwindcss')('tailwind.config.js')],
-    hmrOptions: {
-      host: 'localhost',
-      port: 8080
-    }
-  })
-  .sourceMaps()
-
-
-mix.webpackConfig({
-  devServer: {
-    proxy: {
-      host: 'localhost',
-      port: 8080
-    },
-    watchOptions: {
-      aggregateTimeout: 200,
-      poll: 5000
+/*
+ |--------------------------------------------------------------------------
+ | Options
+ |--------------------------------------------------------------------------
+ |
+ */
+mix.options({
+  processCssUrls: false,
+  autoprefixer: {
+    options: {
+      browsers: ['last 6 versions']
     }
   }
 })
 
+/*
+ |--------------------------------------------------------------------------
+ | CSS
+ |--------------------------------------------------------------------------
+ |
+ */
+const css = () => {
+  return mix
+    .postCss('resources/css/app.css', 'public/css', [
+      require('tailwindcss')('tailwind.config.js')
+    ])
+    .purgeCss({
+      enabled: mix.inProduction(),
+      folders: ['src', 'templates'],
+      extensions: ['html', 'js', 'php', 'vue', 'css']
+    })
+    .sourceMaps()
+}
+
+/*
+ |--------------------------------------------------------------------------
+ | JavaScript
+ |--------------------------------------------------------------------------
+ |
+ */
+const js = () => {
+  return mix.js('resources/js/app.js', 'public/js').sourceMaps()
+}
+
+/*
+ |--------------------------------------------------------------------------
+ | Development
+ |--------------------------------------------------------------------------
+ |
+ */
+const development = () => {
+  js().then(() => css())
+}
+
+/*
+ |--------------------------------------------------------------------------
+ | Production
+ |--------------------------------------------------------------------------
+ |
+ */
+const production = () => {
+  js()
+  css()
+}
+
+if (mix.inProduction()) {
+  production()
+} else {
+  development()
+}
 
 mix.browserSync('localhost:8000')

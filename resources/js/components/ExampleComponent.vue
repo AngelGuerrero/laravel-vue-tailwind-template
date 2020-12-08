@@ -5,9 +5,12 @@
         text-white
         shadow-lg
         p-5
-        rounded"
+        rounded
+        text-center
+        "
   >
     <h1 class="text-4xl">{{ message }}</h1>
+    <h3 class="text-1xl">This works!</h3>
   </div>
 </template>
 
