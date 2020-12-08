@@ -1,4 +1,4 @@
-const mix = require("laravel-mix");
+const mix = require('laravel-mix')
 
 /*
  |--------------------------------------------------------------------------
@@ -11,29 +11,34 @@ const mix = require("laravel-mix");
  |
  */
 
-const tailwindcss = require("tailwindcss");
+const tailwindcss = require('tailwindcss')
 
-mix.js("resources/js/app.js", "public/js")
-    .options({
-        hmrOptions: {
-            host: "localhost", // site's host name
-            port: 8080
-        },
-        processCssUrls: true,
-        postCss: [tailwindcss("tailwind.config.js")]
-    });
+mix
+  .js('resources/js/app.js', 'public/js')
+  .options({
+    hmrOptions: {
+      host: 'localhost', // site's host name
+      port: 8080
+    }
+  })
+  .sourceMaps()
+
+mix.sass('resources/scss/app.scss', 'public/css').options({
+  processCssUrls: false,
+  postCss: [tailwindcss('tailwind.config.js')]
+})
 
 // fix css files 404 issue
 mix.webpackConfig({
-    // add any webpack dev server config here
-    devServer: {
-        proxy: {
-            host: "localhost", // host machine ip
-            port: 8080
-        },
-        watchOptions: {
-            aggregateTimeout: 200,
-            poll: 5000
-        }
+  // add any webpack dev server config here
+  devServer: {
+    proxy: {
+      host: 'localhost', // host machine ip
+      port: 8080
+    },
+    watchOptions: {
+      aggregateTimeout: 200,
+      poll: 5000
     }
-});
+  }
+})
