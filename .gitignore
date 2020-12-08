@@ -23,7 +23,6 @@ public_html/hot
 public/css/
 public/js/
 public/mix-manifest.json
-storage/framework/views/*
 
 storage/*.key
 .env
