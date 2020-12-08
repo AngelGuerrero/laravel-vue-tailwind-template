@@ -1,6 +1,13 @@
 <template>
-  <div class="container p-5 shadow-sm">
-    <h1 class="text-3xl">{{ message }}</h1>
+  <div
+    class="container
+        bg-green-400
+        text-white
+        shadow-lg
+        p-5
+        rounded"
+  >
+    <h1 class="text-4xl">{{ message }}</h1>
   </div>
 </template>
 
@@ -11,7 +18,7 @@ export default {
   props: {
     message: {
       type: String,
-      default: 'Example component!'
+      default: 'Yay!'
     }
   }
 }

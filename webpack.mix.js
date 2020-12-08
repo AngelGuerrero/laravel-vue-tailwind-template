@@ -16,24 +16,20 @@ const tailwindcss = require('tailwindcss')
 mix
   .js('resources/js/app.js', 'public/js')
   .options({
+    processCssUrls: false,
+    postCss: [require('tailwindcss')('tailwind.config.js')],
     hmrOptions: {
-      host: 'localhost', // site's host name
+      host: 'localhost',
       port: 8080
     }
   })
   .sourceMaps()
 
-mix.sass('resources/scss/app.scss', 'public/css').options({
-  processCssUrls: false,
-  postCss: [tailwindcss('tailwind.config.js')]
-})
 
-// fix css files 404 issue
 mix.webpackConfig({
-  // add any webpack dev server config here
   devServer: {
     proxy: {
-      host: 'localhost', // host machine ip
+      host: 'localhost',
       port: 8080
     },
     watchOptions: {
@@ -42,3 +38,6 @@ mix.webpackConfig({
     }
   }
 })
+
+
+mix.browserSync('localhost:8000')
