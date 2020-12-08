@@ -1,5 +1,7 @@
 const mix = require('laravel-mix')
 require('laravel-mix-purgecss')
+require('mix-env-file')
+require('dotenv').config()
 
 /*
  |--------------------------------------------------------------------------
@@ -34,6 +36,8 @@ mix.options({
  |
  */
 const css = () => {
+  console.log('Compilando css')
+
   return mix
     .postCss('resources/css/app.css', 'public/css', [
       require('tailwindcss')('tailwind.config.js')
@@ -63,7 +67,12 @@ const js = () => {
  |
  */
 const development = () => {
-  js().then(() => css())
+  if (process.env.MIX_HMR) {
+    return js().then(() => css())
+  }
+
+  js()
+  css()
 }
 
 /*
@@ -78,8 +87,10 @@ const production = () => {
 }
 
 if (mix.inProduction()) {
+  console.log('prod')
   production()
 } else {
+  console.log('dev')
   development()
 }
 
